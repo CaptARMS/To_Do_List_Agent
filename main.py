@@ -1,8 +1,6 @@
 import random
 from datetime import datetime
 import LLM
-import re
-
         
 # Task Attribute
 class Task:
@@ -51,11 +49,19 @@ class TaskManager:
     def __repr__(self):
         return "\n".join(str(task) for task in self.tasks)
 
+#Initialize the list by adding random tasks since the initial list is not empty
+def Init_manager(manager,n):
+    for i in range(n):
+        task_name, deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
+        deadline = deadline.strip().strip('"')
+        manager.add_task(task_name, deadline)
+    return None
+
 # Agent that randomly selects an action and logs it
-def simulate_agent(manager, execution_index, log_file):
+def simulate_agent(manager, execution_index, log_file,n=5):
+    Init_manager(manager,n)
     action = LLM.askLLM(LLM.prompt_for_options)
     log_entry = f"Execution {execution_index}: Task Chosen: {action}: "
-    Information=""
     if action == "Add a new task":
         task_name, deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
         deadline = deadline.strip().strip('"')
@@ -83,7 +89,7 @@ def simulate_agent(manager, execution_index, log_file):
         if manager.tasks:
             task_marked = random.choice(manager.tasks).name
             modified_task = manager.mark_task_done(task_marked)
-            log_entry += f"Task Marked Done (Name: {modified_task.name}, Deadline: {modified_task.deadline.date()}, Status: {modified_task.status})"
+            log_entry += f"Task Marked Done (Name: {modified_task.name}, Deadline: {modified_task.deadline}, Status: {modified_task.status})"
         else:
             log_entry += "No tasks to mark as done"
 

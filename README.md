@@ -20,3 +20,7 @@
 -Modified the simulate_agent function to ask LLM to give name and deadline of the task
 -Stripped the deadline of error strings to fit it in proper format
 -task_log.txt file is created that keeps the log of all the task executed with time and information
+
+04-10-2024 22:20
+-Added current date in the prompt for deadlines
+-Initialize the list to have n task added at the start
