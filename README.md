@@ -28,4 +28,5 @@
 04-10-2024 22
 -Added user profession in the content of LLM to increase the relevancy of task suggestion
 -Modified LLM.py function so that the deadline is suggested based on the average time to complete the suggested task
--
+-Modifited the LLM.py to consider the current state of the to-do list while suggesting tasks
+-Modified the LLM.py to avoid redundant addition and erroneous edits
