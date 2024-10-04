@@ -7,3 +7,5 @@
 -Added Simulate_agent to carry the operation of the agent
 -Added code for outputing each operation in Log file 
 
+19:45
+-Created a dummy file LLM.py to test the groq API LLM model

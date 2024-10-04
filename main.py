@@ -1,5 +1,8 @@
 import random
 from datetime import datetime
+import os
+from groq import Groq
+
 
 # Task Attribute
 class Task:
@@ -49,7 +52,7 @@ class TaskManager:
         return "\n".join(str(task) for task in self.tasks)
 
 def LLMs():
-    return 
+    return
 
 # Agent that randomly selects an action and logs it
 def simulate_agent(manager, execution_index, log_file):
