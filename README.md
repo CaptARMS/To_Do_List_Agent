@@ -9,3 +9,6 @@
 
 19:45
 -Created a dummy file LLM.py to test the groq API LLM model
+
+20:45
+-Removed the API key which was uploaded on git by mistake
