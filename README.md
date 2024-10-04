@@ -24,3 +24,8 @@
 04-10-2024 22:20
 -Added current date in the prompt for deadlines
 -Initialize the list to have n task added at the start
+
+04-10-2024 22
+-Added user profession in the content of LLM to increase the relevancy of task suggestion
+-Modified LLM.py function so that the deadline is suggested based on the average time to complete the suggested task
+-

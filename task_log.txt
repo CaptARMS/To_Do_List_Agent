@@ -1,7 +1,7 @@
 Task Execution Log:
 
-Execution 1: Task Chosen: Edit a task: Task Modified from Task(Name: "Grocery shopping", Deadline: 2024-11-17, Status: Not Done) to Task(Name: "Book Doctor's Appointment", Deadline: 2024-11-25, Status: Not Done)
-Execution 2: Task Chosen: Mark a task as Done: Task Marked Done (Name: "Buy Milk", Deadline: 2024-11-27 14:00:00, Status: Done)
-Execution 3: Task Chosen: Edit a task: Task Modified from Task(Name: "Purchase Groceries", Deadline: 2024-11-19, Status: Not Done) to Task(Name: "Buy Milk", Deadline: 2024-11-25, Status: Not Done)
-Execution 4: Task Chosen: Add a new task: Task Added (Name: "Write a report on quarterly sales", Deadline: 11-11-2024 14:00, Status: Not Done)
-Execution 5: Task Chosen: Add a new task: Task Added (Name: "Dishes", Deadline: 25-11-2024 14:30, Status: Not Done)
+Execution 1: Task Chosen: Add a new task: Task Added (Name: "Wipe down counters", Deadline: 14-11-2024 10:00, Status: Not Done)
+Execution 2: Task Chosen: Add a new task: Task Added (Name: "Steam the milk to be used for cappuccinos", Deadline: 04-11-2024 09:00, Status: Not Done)
+Execution 3: Task Chosen: Edit a task: Task Modified from Task(Name: "Wipe Down the Espresso Machine", Deadline: 2024-11-11, Status: Not Done) to Task(Name: "Restock coffee beans", Deadline: 2024-11-11, Status: Not Done)
+Execution 4: Task Chosen: Edit a task: Task Modified from Task(Name: "Steam the milk to be used for cappuccinos", Deadline: 2024-11-04, Status: Not Done) to Task(Name: "Clean Up the Coffee Machine", Deadline: 2024-11-04, Status: Not Done)
+Execution 5: Task Chosen: Edit a task: Task Modified from Task(Name: Count Beans, Deadline: 2024-11-12, Status: Not Done) to Task(Name: "Wipe Down Machine", Deadline: 2024-11-04, Status: Not Done)

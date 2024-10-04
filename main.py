@@ -10,7 +10,7 @@ class Task:
         self.status = status
 
     def __repr__(self):
-        return f"Task(Name: {self.name}, Deadline: {self.deadline.date()}, Status: {self.status})"
+        return f"Task(Name: {self.name}, Deadline: {self.deadline}, Status: {self.status})"
 
 
 # Task manager for adding, deleting, editing, and marking tasks as done
@@ -50,20 +50,20 @@ class TaskManager:
         return "\n".join(str(task) for task in self.tasks)
 
 #Initialize the list by adding random tasks since the initial list is not empty
-def Init_manager(manager,n):
+def Init_manager(manager,profession,n):
     for i in range(n):
-        task_name, deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
+        task_name, deadline = LLM.sugg_task(profession)
         deadline = deadline.strip().strip('"')
         manager.add_task(task_name, deadline)
     return None
 
 # Agent that randomly selects an action and logs it
-def simulate_agent(manager, execution_index, log_file,n=5):
-    Init_manager(manager,n)
-    action = LLM.askLLM(LLM.prompt_for_options)
+def simulate_agent(manager, execution_index, log_file,profession,n=5):
+    Init_manager(manager,profession,n)
+    action = LLM.sugg_option(profession)
     log_entry = f"Execution {execution_index}: Task Chosen: {action}: "
     if action == "Add a new task":
-        task_name, deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
+        task_name, deadline = LLM.sugg_task(profession)
         deadline = deadline.strip().strip('"')
         manager.add_task(task_name, deadline)
         log_entry += f"Task Added (Name: {task_name}, Deadline: {deadline}, Status: Not Done)"
@@ -78,7 +78,7 @@ def simulate_agent(manager, execution_index, log_file,n=5):
     elif action == "Edit a task":
         if manager.tasks:
             task_to_edit = random.choice(manager.tasks).name
-            new_name, new_deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
+            new_name, new_deadline = LLM.sugg_task(profession)
             new_deadline = new_deadline.strip().strip('"')
             old_task, new_task = manager.edit_task(task_to_edit, new_name=new_name, new_deadline=new_deadline)
             log_entry += f"Task Modified from {old_task} to {new_task}"
@@ -106,6 +106,9 @@ def simulate_agent(manager, execution_index, log_file,n=5):
 # Example usage
 task_manager = TaskManager()
 log_file = "task_log.txt"
+profession="barista"
+
+
 
 # Ensure the log file is empty at the start
 with open(log_file, 'w') as f:
@@ -113,4 +116,4 @@ with open(log_file, 'w') as f:
 
 # Simulate the agent 5 times and log each action
 for execution_index in range(1, 6):
-    simulate_agent(task_manager, execution_index, log_file)
+    simulate_agent(task_manager, execution_index, log_file,profession)
