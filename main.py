@@ -1,14 +1,14 @@
 import random
 from datetime import datetime
-import os
-from groq import Groq
+import LLM
+import re
 
-
+        
 # Task Attribute
 class Task:
     def __init__(self, name, deadline, status="Not Done"):
         self.name = name
-        self.deadline = datetime.strptime(deadline, '%Y-%m-%d')  # Convert to datetime for easier comparison
+        self.deadline = datetime.strptime(deadline, '%d-%m-%Y %H:%M')
         self.status = status
 
     def __repr__(self):
@@ -37,7 +37,7 @@ class TaskManager:
                 if new_name:
                     task.name = new_name
                 if new_deadline:
-                    task.deadline = datetime.strptime(new_deadline, '%Y-%m-%d')
+                    task.deadline = datetime.strptime(new_deadline, '%d-%m-%Y %H:%M')
                 return old_task, repr(task)
         return None
 
@@ -51,24 +51,14 @@ class TaskManager:
     def __repr__(self):
         return "\n".join(str(task) for task in self.tasks)
 
-def LLMs():
-    return
-
 # Agent that randomly selects an action and logs it
 def simulate_agent(manager, execution_index, log_file):
-    options = [
-        "Add a new task", 
-        "Delete an existing task", 
-        "Edit a task", 
-        "Mark a task as Done", 
-        "Change the name of the task"
-    ]
-    
-    action = random.choice(options)
+    action = LLM.askLLM(LLM.prompt_for_options)
     log_entry = f"Execution {execution_index}: Task Chosen: {action}: "
-
+    Information=""
     if action == "Add a new task":
-        task_name, deadline = LLMs()
+        task_name, deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
+        deadline = deadline.strip().strip('"')
         manager.add_task(task_name, deadline)
         log_entry += f"Task Added (Name: {task_name}, Deadline: {deadline}, Status: Not Done)"
     
@@ -82,7 +72,8 @@ def simulate_agent(manager, execution_index, log_file):
     elif action == "Edit a task":
         if manager.tasks:
             task_to_edit = random.choice(manager.tasks).name
-            new_name, new_deadline = LLMs()
+            new_name, new_deadline = LLM.askLLM(LLM.prompt_for_name),LLM.askLLM(LLM.prompt_for_deadline)
+            new_deadline = new_deadline.strip().strip('"')
             old_task, new_task = manager.edit_task(task_to_edit, new_name=new_name, new_deadline=new_deadline)
             log_entry += f"Task Modified from {old_task} to {new_task}"
         else:
